@@ -13,6 +13,8 @@ func NewEngine(engineType string) EngineBuilder {
 		return NewFundaEngine()
 	case "pararius":
 		return NewParariusEngine()
+	case "idealista":
+		return NewIdealistaEngine()
 	default:
 		return nil
 	}
