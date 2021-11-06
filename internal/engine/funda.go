@@ -38,31 +38,7 @@ func translateFundaSortCategory(sortTerm string) string {
 
 func translateFundaDistance(distance string) string {
 
-	numericDistance, err := strconv.Atoi(distance)
-
-	if err != nil {
-		return ""
-	}
-
-	switch {
-	case numericDistance < 1:
-		return ""
-
-	case numericDistance >= 1 && numericDistance < 2:
-		return "+1km"
-
-	case numericDistance >= 2 && numericDistance < 5:
-		return "+2km"
-
-	case numericDistance >= 5 && numericDistance < 10:
-		return "+5km"
-
-	case numericDistance >= 10:
-		return "+10km"
-
-	default:
-		return ""
-	}
+	return distance
 }
 
 func translateFundaPrices(maxPrice string, minPrice string) string {
@@ -97,13 +73,15 @@ func (f *funda) BuildUrl(metadata models.RequestMetadata) string {
 		locationUrl += "/" + priceInterval
 	}
 
-	if distance := translateFundaDistance(metadata.Distance); distance != "" {
+	if distance := translateFundaDistance(metadata.CustomParams["distance"]); distance != "" {
 		locationUrl += "/" + distance
 	}
 
 	if sortOptions := translateFundaSortCategory(metadata.SortCategory); sortOptions != "" {
 		locationUrl += "/" + sortOptions
 	}
+
+	fmt.Printf("%s\n", locationUrl)
 
 	return locationUrl
 }

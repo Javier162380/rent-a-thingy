@@ -21,9 +21,9 @@ type RequestMetadata struct {
 	Engine             string
 	SortCategory       string
 	ZipCodeOrDistricts string
-	Distance           string
 	MaxPrice           string
 	MinPrice           string
+	CustomParams       map[string]string
 }
 
 func cityMetadata() map[string]City {
