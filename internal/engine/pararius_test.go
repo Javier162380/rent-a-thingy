@@ -1,8 +1,6 @@
 package engine
 
 import (
-	// "reflect"
-	// "rent-a-thingy/internal/models"
 	"reflect"
 	"rent-a-thingy/internal/models"
 	"testing"
@@ -133,8 +131,8 @@ func Test_pararius_BuildUrl(t *testing.T) {
 	}, {
 		name:   "test 2",
 		fields: fields{baseUrl: PARARIUS_BASE_URL},
-		args:   args{metadata: models.RequestMetadata{City: "Amsterdam", Engine: "parirus", ZipCodeOrDistricts: "wrok 3", SortCategory: "rental price ↑", MaxPrice: "4000", MinPrice: "1000"}},
-		want:   "https://www.pararius.nl/huurwoningen/amsterdam/1000-4000/sorteer-prijs-op/wijk-wrok-3",
+		args:   args{metadata: models.RequestMetadata{City: "Utrecht", Engine: "parirus", ZipCodeOrDistricts: "wrok 3", SortCategory: "rental price ↑", MaxPrice: "4000", MinPrice: "1000"}},
+		want:   "https://www.pararius.nl/huurwoningen/utrecht/1000-4000/sorteer-prijs-op/wijk-wrok-3",
 	}}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
