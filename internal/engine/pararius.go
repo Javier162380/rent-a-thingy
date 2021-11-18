@@ -7,6 +7,8 @@ import (
 	"strings"
 )
 
+var PARARIUS_BASE_URL = "https://www.pararius.nl/huurwoningen/"
+
 type pararius struct {
 	baseUrl string
 }
@@ -50,11 +52,13 @@ func translateParariusPrices(maxPrice string, minPrice string) string {
 
 	switch {
 	case maxPriceInteger < minPriceInteger:
-		return fmt.Sprintf("%d-%d", maxPriceInteger, maxPriceInteger)
+		return fmt.Sprintf("%d-%d", maxPriceInteger, minPriceInteger)
 
 	case minPriceInteger < maxPriceInteger:
 		return fmt.Sprintf("%d-%d", minPriceInteger, maxPriceInteger)
 
+	case minPriceInteger == maxPriceInteger:
+		return fmt.Sprintf("%d-%d", minPriceInteger, maxPriceInteger)
 	default:
 		return ""
 	}
@@ -81,6 +85,6 @@ func (p *pararius) BuildUrl(metadata models.RequestMetadata) string {
 
 func NewParariusEngine() EngineBuilder {
 	return &pararius{
-		baseUrl: "https://www.pararius.nl/huurwoningen/",
+		baseUrl: PARARIUS_BASE_URL,
 	}
 }
