@@ -65,7 +65,7 @@ func argSelectorWithOptions(msg string, options []string, errorMessage string, u
 		if contains(options, result) {
 			return result, nil
 		} else {
-			return "", errors.New(fmt.Sprintf("Option %s : %s it is not available", msg, result))
+			return "", fmt.Errorf("option %s : %s it is not available", msg, result)
 		}
 
 	}
@@ -80,7 +80,7 @@ func openBrowser(url string) error {
 	case "linux":
 		cmd = exec.Command("sensible-browser", url)
 	default:
-		return fmt.Errorf("Failed to open browser. Platform %s not supported.", runtime.GOOS)
+		return fmt.Errorf("failed to open browser. platform %s not supported", runtime.GOOS)
 	}
 
 	return cmd.Start()

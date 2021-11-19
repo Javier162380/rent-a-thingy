@@ -90,4 +90,5 @@ func ExecuteForm() {
 	url := engineInstance.BuildUrl(enrichMetadata)
 
 	openBrowser(url)
+
 }

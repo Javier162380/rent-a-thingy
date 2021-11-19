@@ -6,6 +6,8 @@ import (
 	"strconv"
 )
 
+var FUNDA_BASE_URL = "https://www.funda.nl/en/huur/"
+
 type funda struct {
 	baseUrl string
 }
@@ -55,9 +57,12 @@ func translateFundaPrices(maxPrice string, minPrice string) string {
 
 	switch {
 	case maxPriceInteger < minPriceInteger:
-		return fmt.Sprintf("%d-%d", maxPriceInteger, maxPriceInteger)
+		return fmt.Sprintf("%d-%d", maxPriceInteger, minPriceInteger)
 
 	case minPriceInteger < maxPriceInteger:
+		return fmt.Sprintf("%d-%d", minPriceInteger, maxPriceInteger)
+
+	case maxPriceInteger == minPriceInteger:
 		return fmt.Sprintf("%d-%d", minPriceInteger, maxPriceInteger)
 
 	default:
@@ -88,6 +93,6 @@ func (f *funda) BuildUrl(metadata models.RequestMetadata) string {
 
 func NewFundaEngine() EngineBuilder {
 	return &funda{
-		baseUrl: "https://www.funda.nl/en/huur/",
+		baseUrl: FUNDA_BASE_URL,
 	}
 }

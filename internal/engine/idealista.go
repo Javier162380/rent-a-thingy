@@ -6,6 +6,8 @@ import (
 	"strings"
 )
 
+var IDEALISTA_BASE_URL = "https://www.idealista.com/alquiler-viviendas/"
+
 type idealista struct {
 	baseURL string
 }
@@ -52,6 +54,6 @@ func (i *idealista) BuildUrl(metadata models.RequestMetadata) string {
 
 func NewIdealistaEngine() EngineBuilder {
 	return &idealista{
-		baseURL: "https://www.idealista.com/alquiler-viviendas/",
+		baseURL: IDEALISTA_BASE_URL,
 	}
 }
