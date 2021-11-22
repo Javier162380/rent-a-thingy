@@ -1,9 +1,10 @@
 package engine
 
 import (
-	"reflect"
 	"rent-a-thingy/internal/models"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func Test_translateFundaSortCategory(t *testing.T) {
@@ -42,9 +43,7 @@ func Test_translateFundaSortCategory(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := translateFundaSortCategory(tt.args.sortTerm); got != tt.want {
-				t.Errorf("translateFundaSortCategory() = %v, want %v", got, tt.want)
-			}
+			assert.Equal(t, tt.want, translateFundaSortCategory(tt.args.sortTerm))
 		})
 	}
 }
@@ -64,9 +63,7 @@ func Test_translateFundaDistance(t *testing.T) {
 	}}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := translateFundaDistance(tt.args.distance); got != tt.want {
-				t.Errorf("translateFundaDistance() = %v, want %v", got, tt.want)
-			}
+			assert.Equal(t, tt.want, translateFundaDistance(tt.args.distance))
 		})
 	}
 }
@@ -96,9 +93,7 @@ func Test_translateFundaPrices(t *testing.T) {
 	}}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := translateFundaPrices(tt.args.maxPrice, tt.args.minPrice); got != tt.want {
-				t.Errorf("translateFundaPrices() = %v, want %v", got, tt.want)
-			}
+			assert.Equal(t, tt.want, translateFundaPrices(tt.args.maxPrice, tt.args.minPrice))
 		})
 	}
 }
@@ -136,9 +131,7 @@ func Test_funda_BuildUrl(t *testing.T) {
 			f := &funda{
 				baseUrl: tt.fields.baseUrl,
 			}
-			if got := f.BuildUrl(tt.args.metadata); got != tt.want {
-				t.Errorf("funda.BuildUrl() = %v, want %v", got, tt.want)
-			}
+			assert.Equal(t, tt.want, f.BuildUrl(tt.args.metadata))
 		})
 	}
 }
@@ -153,9 +146,7 @@ func TestNewFundaEngine(t *testing.T) {
 	}}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := NewFundaEngine(); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("NewFundaEngine() = %v, want %v", got, tt.want)
-			}
+			assert.Equal(t, tt.want, NewFundaEngine())
 		})
 	}
 }

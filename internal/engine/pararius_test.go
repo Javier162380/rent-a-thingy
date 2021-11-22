@@ -1,9 +1,10 @@
 package engine
 
 import (
-	"reflect"
 	"rent-a-thingy/internal/models"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func Test_translateParariusSortCategory(t *testing.T) {
@@ -41,9 +42,7 @@ func Test_translateParariusSortCategory(t *testing.T) {
 	}}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := translateParariusSortCategory(tt.args.sortTerm); got != tt.want {
-				t.Errorf("translateParariusSortCategory() = %v, want %v", got, tt.want)
-			}
+			assert.Equal(t, tt.want, translateParariusSortCategory(tt.args.sortTerm))
 		})
 	}
 }
@@ -71,9 +70,7 @@ func Test_translateParariusDistrict(t *testing.T) {
 	}}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := translateParariusDistrict(tt.args.districtName); got != tt.want {
-				t.Errorf("translateParariusDistrict() = %v, want %v", got, tt.want)
-			}
+			assert.Equal(t, tt.want, translateParariusDistrict(tt.args.districtName))
 		})
 	}
 }
@@ -103,10 +100,7 @@ func Test_translateParariusPrices(t *testing.T) {
 	}}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := translateParariusPrices(tt.args.maxPrice, tt.args.minPrice); got != tt.want {
-
-				t.Errorf("translateParariusPrices(%v, %v) = %v, want %v", tt.args.maxPrice, tt.args.minPrice, got, tt.want)
-			}
+			assert.Equal(t, tt.want, translateParariusPrices(tt.args.maxPrice, tt.args.minPrice))
 		})
 	}
 }
@@ -156,9 +150,7 @@ func TestNewParariusEngine(t *testing.T) {
 	}}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := NewParariusEngine(); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("NewParariusEngine() = %v, want %v", got, tt.want)
-			}
+			assert.Equal(t, tt.want, NewParariusEngine())
 		})
 	}
 }

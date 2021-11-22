@@ -1,9 +1,10 @@
 package engine
 
 import (
-	"reflect"
 	"rent-a-thingy/internal/models"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func Test_translateIdealistaSortCategory(t *testing.T) {
@@ -45,9 +46,7 @@ func Test_translateIdealistaSortCategory(t *testing.T) {
 	}}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := translateIdealistaSortCategory(tt.args.sortTerm); got != tt.want {
-				t.Errorf("translateIdealistaSortCategory() = %v, want %v", got, tt.want)
-			}
+			assert.Equal(t, tt.want, translateIdealistaSortCategory(tt.args.sortTerm))
 		})
 	}
 }
@@ -71,9 +70,7 @@ func Test_translateIdealistaDistrict(t *testing.T) {
 	}}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := translateIdealistaDistrict(tt.args.districtName); got != tt.want {
-				t.Errorf("translateIdealistaDistrict() = %v, want %v", got, tt.want)
-			}
+			assert.Equal(t, tt.want, translateIdealistaDistrict(tt.args.districtName))
 		})
 	}
 }
@@ -106,9 +103,7 @@ func Test_idealista_BuildUrl(t *testing.T) {
 			i := &idealista{
 				baseURL: tt.fields.baseURL,
 			}
-			if got := i.BuildUrl(tt.args.metadata); got != tt.want {
-				t.Errorf("idealista.BuildUrl() = %v, want %v", got, tt.want)
-			}
+			assert.Equal(t, tt.want, i.BuildUrl(tt.args.metadata))
 		})
 	}
 }
@@ -123,9 +118,7 @@ func TestNewIdealistaEngine(t *testing.T) {
 	}}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := NewIdealistaEngine(); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("NewIdealistaEngine() = %v, want %v", got, tt.want)
-			}
+			assert.Equal(t, tt.want, NewIdealistaEngine())
 		})
 	}
 }
